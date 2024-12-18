@@ -1,0 +1,31 @@
+from urllib.request import Request, urlopen
+import json
+user_input = input('Enter a word ')
+req = Request(
+    url=f'https://api.dictionaryapi.dev/api/v2/entries/en/{user_input}',
+    headers={'User-Agent': 'Mozilla/5.0'}
+)
+webpage = urlopen(req).read()
+ 
+parsed = json.loads(webpage)
+print(f"meanings: {parsed[0]["meanings"][0]["definitions"][0]["definition"]}")
+
+try:
+    print(f'Type of word: {parsed[0]['meanings'][0]["partOfSpeech"]}')
+except:
+    print('this one does not have an type')
+
+try:
+    print(f"Pronunciation: {parsed[0]["phonetics"][1]['text']}")
+except:
+    print('this one does not have pronunciation')
+
+try:
+    print(f"Example sentence: {parsed[0]["meanings"][0]["definitions"][0]["example"]}")
+except:
+    print('this one does not have an example sentence')
+
+try:
+    print(f'Synonyms: {parsed[0]["meanings"][0]["definitions"][2]["synonyms"]}')
+except:
+    print('this one does not have a synonym')
