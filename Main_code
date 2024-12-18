@@ -1,3 +1,5 @@
+# Sawyer help me with this project
+
 from urllib.request import Request, urlopen
 import json
 user_input = input('Enter a word ')
